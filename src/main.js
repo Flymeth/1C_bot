@@ -73,6 +73,6 @@ async function registerCommands(id, commands) {
     }
 }
 
-registerCommands("887684698988478525", vars.commands)
+// registerCommands("887684698988478525", vars.commands)
 
 client.login(token)
