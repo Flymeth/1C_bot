@@ -12,7 +12,7 @@ module.exports = {
     run: async (e, vars, args) => {
         let messageID = ""
         
-        if(!vars.slash) messageID = e.reference?.messageID
+        if(!vars.slash) messageID = e.reference?.messageId
         else messageID= vars.slash["_hoistedOptions"][0].message.id
 
         const color = "#2485EF"
@@ -84,6 +84,9 @@ module.exports = {
             }
 
             if(!vars.slash) reaction.users.remove()
+
+            
+            fs.writeFileSync(pythonPath, "")
             exe.kill()
 
             // si il y a une erreur, on change la couleur de l'embed
