@@ -2,6 +2,10 @@ const discord = require('discord.js')
 const fs = require('fs')
 const ecoledirecte = require('api-ecoledirecte-france')
 const request = require('request')
+// token
+const secrets = require('./secrets.json')
+
+const token = secrets.token||process.env.TOKEN
 
 const {Intents, Client} = require('discord.js')
 const options = require('./configs.json')
@@ -59,7 +63,7 @@ async function registerCommands(id, commands) {
             method: "POST",
             json: JSON.stringify(commandData),
             headers: {
-                'Authorization': 'Bot ' + options.token,
+                'Authorization': 'Bot ' + token,
                 'Content-Type': 'application/json'
             }
         })
@@ -68,4 +72,4 @@ async function registerCommands(id, commands) {
 
 registerCommands("887684698988478525", vars.commands)
 
-client.login(options.token)
+client.login(token)

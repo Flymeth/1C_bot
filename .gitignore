@@ -3,3 +3,6 @@ node_modules
 
 # Me permet d'avoir la console en dehors de l'éditeur
 shell.com
+
+# Les informations ultra confidentiels du robot (comme le token par exemple)
+src/secrets.json
