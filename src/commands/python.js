@@ -1,6 +1,6 @@
 const process = require('child_process')
 const fs = require('fs')
-let fileNB = 0
+
 module.exports = {
     name: "python",
     alias: [
