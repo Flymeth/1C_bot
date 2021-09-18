@@ -53,26 +53,4 @@ for(let event of vars.events) {
     })
 }
 
-async function registerCommands(id, commands) {
-    for(let command of commands) {
-        const commandData = {
-            name: command.name,
-            description: command.description,
-            type: command.type
-        }
-        const apiEndPointGlobal = `https://discord.com/api/v8/applications/${id}/commands`
-
-        request.post(apiEndPointGlobal, {
-            method: "POST",
-            json: JSON.stringify(commandData),
-            headers: {
-                'Authorization': 'Bot ' + token,
-                'Content-Type': 'application/json'
-            }
-        })
-    }
-}
-
-// registerCommands("887684698988478525", vars.commands)
-
 client.login(token)
