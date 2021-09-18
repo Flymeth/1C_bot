@@ -3,7 +3,10 @@ const fs = require('fs')
 const ecoledirecte = require('api-ecoledirecte-france')
 const request = require('request')
 // token
-const secrets = require('./secrets.json')
+let secrets;
+try {
+    secrets = require('./secrets.json')
+} catch (e) {}
 
 const token = secrets.token||process.env.TOKEN
 
