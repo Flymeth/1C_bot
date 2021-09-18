@@ -12,7 +12,7 @@ module.exports = {
     run: async (e, vars, args) => {
         let messageID = ""
         
-        if(!vars.slash) messageID = e.reference?.messageId
+        if(!vars.slash) messageID = e.reference.messageId
         else messageID= vars.slash["_hoistedOptions"][0].message.id
 
         const color = "#2485EF"
