@@ -1,0 +1,5 @@
+# Modules nodejs (inutile sur un repo)
+node_modules
+
+# Me permet d'avoir la console en dehors de l'éditeur
+shell.com

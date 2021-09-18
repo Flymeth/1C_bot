@@ -1,0 +1,17 @@
+{
+  "name": "1c_bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Flymeth",
+  "license": "ISC",
+  "dependencies": {
+    "api-ecoledirecte-france": "^0.1.1",
+    "discord.js": "^13.1.0",
+    "node-fetch": "^3.0.0",
+    "request": "^2.88.2"
+  }
+}
