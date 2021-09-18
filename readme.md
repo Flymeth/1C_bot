@@ -51,22 +51,22 @@ Tout d'abord affichez la liste des commandes disponibles avec la commande `1c.ec
 |`1c.report`|Permet de me faire part d'un commentaire, d'un bug ou d'un problème de compte ecoleDirecte|
 
 ## **Admins:**
-Afin de ne pas laisser le robot sans surveillance, j'ai défini des "admins" du robot. Ces admins ont accès à des commandes qu'un plus poussé qu'un utilisateur normal.
+Afin de ne pas laisser le robot sans surveillance, j'ai défini des "admins". Chaques professeurs est automatiquement définie en tant qu'admin. Ces derniers ont accès à des commandes plus poussé qu'un utilisateur normal.
 
 ### _Commandes admins_:
 |Commandes|Fonctions|
 |:-------:|:-------:|
-|`1c.ecoleDirecte removeAccount`|Permet de forcer la déconnection d'un compte ecoleDirecte à un utuilisateur discord|
+|`1c.ecoleDirecte removeAccount`|Permet de forcer la déconnection d'un compte ecoleDirecte à un utilisateur discord|
 |`1c.stop`|Permet de déconnecter le robot (utiliser uniquement en cas d'urgence)|
 
 ## **Ajouter le robot:**
 Pour ajouter le robot sur votre server il vous suffira de:
 1. Clicker sur [ce lien](https://discord.com/api/oauth2/authorize?client_id=887684698988478525&permissions=0&scope=applications.commands%20bot), qui vous redirigera vers une page discord.
-    - Notez que si vous n'êtes pas connecté à discord, discord vous demandera de vous connecter pour continuer.
-    - De plus, vous ne pourrez pas ajouter de robot si n'avez pas accès à la permissions `MANAGE_GUILD` de discord.
+    - Notez que devrez vous connecter pour ajouter le robot sur votre serveur.
+    - De plus, vous ne pourrez pas ajouter le robot si n'avez pas accès à la permissions `MANAGE_GUILD` de discord.
 2. Selectionnez votre serveur dans la liste proposé par discord (cliquez sur "Séléctionner un serveur")
-    - Si votre serveur n'apparait pas dans la liste, c'est que vous ne possèdez pas la permission `MANAGE_GUILD` sur ce serveur.
+    - Si votre serveur n'apparait pas dans la liste, c'est que vous ne possédez pas la permission `MANAGE_GUILD` sur ce serveur.
 3. Clickez sur "Autoriser" (bouton bleu en bas de la fenêtre).
 
-Et voilà! Il est sur votre serveur! Veillez à ne pas lui enlever la permission `ADMINISTRATOR` pour veillé à son bon fonctionnement.
-> Note: Si vous possédez la permission `ADMINISTRATOR` sur votre serveur, ou que vous en êtes le propriétaire, la permission `MANAGE_GUILD` ne sera pas nécéssaire pour l'ajouter sur votre serveur.
+Et voilà! Il est sur votre serveur! Veillez à ne pas lui enlever la permission `ADMINISTRATOR` pour veiller à son bon fonctionnement.
+> Note: Si vous possédez la permission `ADMINISTRATOR` sur votre serveur, ou que vous en êtes le propriétaire, la permission `MANAGE_GUILD` ne sera pas nécéssaire pour ajouter le robot sur votre serveur.
