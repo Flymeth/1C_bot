@@ -10,7 +10,10 @@ module.exports = {
     description: "Execute du code python directement sur discord!",
     type: 3,
     run: async (e, vars, args) => {
-        const messageID = e.reference?.messageId || vars.slash["_hoistedOptions"][0].message.id
+        let messageID = ""
+        
+        if(!vars.slash) messageID = e.reference?.messageID
+        else messageID= vars.slash["_hoistedOptions"][0].message.id
 
         const color = "#2485EF"
 
@@ -81,6 +84,7 @@ module.exports = {
             }
 
             if(!vars.slash) reaction.users.remove()
+            exe.kill()
 
             // si il y a une erreur, on change la couleur de l'embed
             const embedColor = errored ? "#E92626" : color
