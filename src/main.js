@@ -3,12 +3,12 @@ const fs = require('fs')
 const ecoledirecte = require('api-ecoledirecte-france')
 const request = require('request')
 // token
-let secrets;
+let secrets = {}
 try {
     secrets = require('./secrets.json')
 } catch (e) {}
 
-const token = secrets.token||process.env.TOKEN
+const token = process.env.TOKEN || secrets.token
 
 const {Intents, Client} = require('discord.js')
 const options = require('./configs.json')
