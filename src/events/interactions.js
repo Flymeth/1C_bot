@@ -3,7 +3,7 @@ module.exports = {
     name: "interactionCreate",
     active: true,
     run: (e, vars) => {
-        if(!e.isCommand() || !e.isContextMenu()) return
+        if(!e.isCommand() && !e.isContextMenu()) return
         const {commandName} = e
         const command = vars.commands.find(c => c.name === commandName)
         vars.slash = e.options
