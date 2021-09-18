@@ -5,7 +5,7 @@ module.exports = {
     needAccount: true,
     run: async(e, vars, args) => {
         
-        return e.reply("En cour de développement!")
+        return e.reply({content: "En cour de développement!", ephemeral: true})
         
         // const {account} = vars
         // const {data} = await vars.ecoledirecte.getNotes(account.token, account.ecoledirecte.id)

@@ -10,7 +10,7 @@ module.exports = {
     description: "Execute du code python directement sur discord!",
     type: 3,
     run: async (e, vars, args) => {
-        const message = e.reference
+        const messageID = e.reference?.messageId || vars.slash["_hoistedOptions"][0].message.id
 
         const color = "#2485EF"
 
@@ -32,17 +32,17 @@ module.exports = {
 
         const embeds = [helpEmbed1, helpEmbed2, helpEmbed3]
 
-        if(!message) {
+        if(!messageID) {
             e.reply({content: "Voici comment utiliser cette commande:", embeds})
             return
         }
 
-        const code = e.channel.messages.cache.get(message.messageId)
+        const code = e.channel.messages.cache.get(messageID)
         if(!code.content.startsWith("```py") || !code.content.endsWith('```')) return e.reply({content: "Ton code ne peux pas être interprété en python. Voici comment utiliser cette commande:", embeds})
 
         const loadingEmoji = vars.client.emojis.cache.find(e => e.name === 'loading')
 
-        const reaction = await e.react(loadingEmoji)
+        if(!vars.slash) {var reaction = await e.react(loadingEmoji)}
 
         let python = code.content.replace('```py', '')
         python = python.substr(0, python.length-3)
@@ -80,14 +80,14 @@ module.exports = {
                 out = out.substr(0, 1000) + '[...]'
             }
 
-            reaction.remove()
+            if(!vars.slash) reaction.users.remove()
 
             // si il y a une erreur, on change la couleur de l'embed
             const embedColor = errored ? "#E92626" : color
 
             const outEmbed = new vars.discord.MessageEmbed()
             .setColor(embedColor)
-            .setAuthor(`Voici le résultat de ton programe ${errored? "(erreur)" : ""}:`, e.author.displayAvatarURL({dynamic: true, size: 1024}))
+            .setAuthor(`Voici le résultat de ton programe ${errored? "(erreur)" : ""}:`, e.member.user.displayAvatarURL({dynamic: true, size: 1024}))
             .setDescription('```console\n ' + out + '```')
             e.reply({embeds: [outEmbed]})
         })

@@ -1,7 +1,6 @@
 const discord = require('discord.js')
 const fs = require('fs')
 const ecoledirecte = require('api-ecoledirecte-france')
-const request = require('request')
 // token
 let secrets = {}
 try {
@@ -26,7 +25,8 @@ const vars = {
     options,
     commands: [],
     events: [],
-    ecoledirecte
+    ecoledirecte,
+    token
 }
 
 // commands
@@ -47,6 +47,7 @@ for(let file of e) {
     }
 }
 
+// load events
 for(let event of vars.events) {
     client.on(event.name, (e) => {
         event.run(e, vars)

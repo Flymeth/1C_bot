@@ -15,16 +15,16 @@ module.exports = {
         .setColor(vars.colors.user || "RANDOM")
         .setTitle("Entres ton nom d'utilisateur:")
         .setFooter("Notez qu'en aucun cas votre nom d'utilisateur & votre mot de passe ne seront enregistrés de quelques façons qu'il soit.")
-        const dmChannel = await e.author.createDM()
+        const dmChannel = await e.member.user.createDM()
 
-        e.author.send({embeds: [embed]}).then(async message => {
-            const securityMSG = await e.reply(`Pour des raisons de sécurités, la suite se passe en message privées!\n> https://discord.com/channels/@me/${dmChannel.id}/${message.id}`)
+        e.member.user.send({embeds: [embed]}).then(async message => {
+            const securityMSG = await e.reply({content: `Pour des raisons de sécurités, la suite se passe en message privées!\n> https://discord.com/channels/@me/${dmChannel.id}/${message.id}`, ephemeral: true})
             const messageForAccount = await message.channel.awaitMessages({max: 1, time: vars.options.awaitTime})
             const accountName = messageForAccount.first()
 
             async function end(msg) {
                 await message.delete()
-                await securityMSG.delete()
+                await securityMSG?.delete()
                 await message.channel.send(msg)
             }
 
@@ -59,7 +59,7 @@ module.exports = {
             .setColor("#0EF421")
             await message.edit({embeds: [embed]})
 
-            const saved = saveAccount(vars, accountName.content, accountMDP.content, e.author)
+            const saved = saveAccount(vars, accountName.content, accountMDP.content, e.member.user)
 
             if(typeof saved === "string") {
                 // Si erreur (ou l'utilisateur est déjà connecté)
@@ -68,7 +68,7 @@ module.exports = {
 
             // Si ca a été enregistré
             end(`Ton compte EcoleDirecte est maintenant lié à celui de discord!\n> https://discord.com/channels/${e.guild.id}/${e.channel.id}`)
-            e.reply("Tu es désormais connecté!")
+            e.channel.send(e.member.user.toString() + " vient de connecter son compte ecoleDirecte à celui de discord!")
         })
     }
 }

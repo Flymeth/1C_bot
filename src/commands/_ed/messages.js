@@ -11,7 +11,7 @@ module.exports = {
         const {data} = await vars.ecoledirecte.getMessages(account.token, account.ecoledirecte.id)
         const {received} = data.messages
 
-        if(!received) return e.reply("Tu n'as aucun message présent dans la messagerie!")
+        if(!received) return e.reply({content: "Tu n'as aucun message présent dans ta messagerie!", ephemeral: true})
 
         const sortedByName = {}
         for(let msg in received) {
@@ -23,7 +23,7 @@ module.exports = {
         }
 
         const embed = new vars.discord.MessageEmbed()
-        .setAuthor("Tu as " + received.length + " message(s):", e.author.displayAvatarURL({size: 1024, dynamic: true}))
+        .setAuthor("Tu as " + received.length + " message(s):", e.member.user.displayAvatarURL({size: 1024, dynamic: true}))
         .setColor(vars.colors.user || vars.colors.bot || "RANDOM")
         for(let author in sortedByName) {
             const messages = sortedByName[author]

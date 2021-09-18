@@ -5,8 +5,8 @@ module.exports = {
     active: true,
     needAccount: true,
     run: async(e, vars, args) => {
-        const done = resetAccount(e.author)
-        if(typeof done === "string") return e.reply(done)
+        const done = resetAccount(e.member.user)
+        if(typeof done === "string") return e.reply({content: done, ephemeral: true})
         else return e.reply("Tu a été déconnecté!")
     }
 }

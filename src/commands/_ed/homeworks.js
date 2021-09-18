@@ -34,7 +34,7 @@ module.exports = {
         }
 
         const embed = new vars.discord.MessageEmbed()
-        .setAuthor('Et voici tes devoirs:', e.author.displayAvatarURL({size: 1024, dynamic: true}))
+        .setAuthor('Et voici tes devoirs:', e.member.user.displayAvatarURL({size: 1024, dynamic: true}))
         .setDescription("Légendes:\n" + legendTxt)
         .setColor(vars.colors.user || vars.colors.bot || "RANDOM")
         for(let date in homeworks.data) {

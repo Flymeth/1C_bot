@@ -3,11 +3,21 @@ module.exports = {
     active: true,
     description: "Me faire part de commentaire, d'un bug trouvé et/ou d'un problème de compte.",
     type: 1,
+    options: [
+        {
+            name: "message",
+            description: "Le message que vous souhaitez m'envoyer",
+            type: 3,
+            required: true,
+        }
+    ],
     run: async (e, vars, args) => {
-        if(!args.length || e.content < 100) return e.reply("Ton message dois faire minimum 100 lettres (pour me permettre de comprendre au maximum ton problème.)")
+        const message = args.join(' ') || vars.slash.getMessage("message")
+
+        if(!message || message.length < 100) return e.reply({content: "Ton message dois faire minimum 100 lettres (pour me permettre de comprendre au maximum ton problème.)", ephemeral: true})
 
         const devUser = vars.client.users.cache.get(vars.options.developer)
-        await devUser.send("**__REPORT FROM `" + e.author.tag + "`:__**\n\n" + args.join(' '))
-        e.reply("Ton message a été pris en compte!")
+        await devUser.send("**__REPORT FROM `" + e.member.user.tag + "`:__**\n\n" + message)
+        e.reply({content: "Ton message a été pris en compte!", ephemeral: true})
     }
 }
