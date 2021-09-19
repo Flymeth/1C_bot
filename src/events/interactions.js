@@ -6,7 +6,10 @@ module.exports = {
         if(!e.isCommand() && !e.isContextMenu()) return
         const {commandName} = e
         const command = vars.commands.find(c => c.name === commandName)
-        vars.slash = e.options
+
+        const varsSlash = {...vars}
+
+        varsSlash.slash = e.options
 
         // A partir de ce moment là on peut executer la commande
 
@@ -16,7 +19,7 @@ module.exports = {
             bot: e.guild.me.displayColor
         }
 
-        vars.colors = colors
+        varsSlash.colors = colors
 
         // si la commande a besoin de sous-commandes
         if(command.required) {
@@ -31,9 +34,9 @@ module.exports = {
                     if(module.active) files.push(module)
                 }
             }
-            vars.files = files
+            varsSlash.files = files
         }
 
-        command.run(e, vars, [])
+        command.run(e, varsSlash, [])
     }
 }
