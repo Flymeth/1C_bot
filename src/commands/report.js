@@ -12,7 +12,7 @@ module.exports = {
         }
     ],
     run: async (e, vars, args) => {
-        const message = args.join(' ') || vars.slash.getMessage("message")
+        const message = args.join(' ') || vars.slash.getString("message")
 
         if(!message || message.length < 100) return e.reply({content: "Ton message dois faire minimum 100 lettres (pour me permettre de comprendre au maximum ton problème.)", ephemeral: true})
 
