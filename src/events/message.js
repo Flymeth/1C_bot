@@ -14,7 +14,7 @@ module.exports = {
 
         if(!e.content.startsWith(vars.options.prefix)) return
         const args = e.content.replace(vars.options.prefix,'').split(' ')
-        const command = args.shift()
+        const command = (args.shift()).toLowerCase()
 
         const doCommand = vars.commands.find(c => {
             if(c.name === command) return true
@@ -31,6 +31,7 @@ module.exports = {
         }
 
         vars.colors = colors
+        vars.loadingEmote = vars.client.emojis.cache.find(e => e.name === 'loading')
 
         // si la commande a besoin de sous-commandes
         if(doCommand.required) {

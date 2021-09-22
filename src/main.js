@@ -1,6 +1,9 @@
 const discord = require('discord.js')
 const fs = require('fs')
 const ecoledirecte = require('api-ecoledirecte-france')
+const options = require('./configs.json')
+const {getAssets} = require('./tools/loadAssets')
+const package = require('../package.json')
 // token
 let secrets = {}
 try {
@@ -10,7 +13,6 @@ try {
 const token = process.env.TOKEN || secrets.token
 
 const {Intents, Client} = require('discord.js')
-const options = require('./configs.json')
 let allIntents = []
 for(let i in Intents.FLAGS) {
     allIntents.push(i)
@@ -19,6 +21,10 @@ const client = new Client({
     intents: allIntents
 })
 
+// Load assets (path location in the options.json file)
+// const assets = getAssets() ==> Find a way to attach a local file to discord image embed
+const {assets} = options
+
 const vars = {
     discord,
     client,
@@ -26,7 +32,9 @@ const vars = {
     commands: [],
     events: [],
     ecoledirecte,
-    token
+    token,
+    assets,
+    package
 }
 
 // commands

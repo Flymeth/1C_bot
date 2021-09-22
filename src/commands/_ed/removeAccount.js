@@ -30,8 +30,8 @@ module.exports = {
         const done = resetAccount(user)
         if(typeof done === "string") return e.reply({content: done, ephemeral: true})
         else {
-            e.reply("Le compte ecoleDirecte de `" + user.tag + "` a été délié de celui de discord!")
             user.send("Ton compte discord vient d'être délié de ton compte EcoleDirecte. Pour plus d'information, renseignes-toi auprès de `" + e.member.user.tag + "`.")
+            return e.reply("Le compte ecoleDirecte de `" + user.tag + "` a été délié de celui de discord!")
         }
     }
 }

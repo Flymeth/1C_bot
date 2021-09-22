@@ -21,6 +21,6 @@ module.exports = {
         .addField('Classe:', ecoledirecte.profile.classe.libelle)
         .addField('Cantine:', ecoledirecte.modules.find(m => m.code === "RESERVATIONS").params.regime)
         
-        e.reply({embeds: [embed]})
+        return e.reply({embeds: [embed]})
     }
 }

@@ -16,7 +16,7 @@ module.exports = {
 
         if(!message || message.length < 100) return e.reply({content: "Ton message dois faire minimum 100 lettres (pour me permettre de comprendre au maximum ton problème.)", ephemeral: true})
 
-        const devUser = vars.client.users.cache.get(vars.options.developer)
+        const devUser = vars.client.users.cache.get(vars.options.developper.discord_id)
         await devUser.send("**__REPORT FROM `" + e.member.user.tag + "`:__**\n\n" + message)
         e.reply({content: "Ton message a été pris en compte!", ephemeral: true})
     }

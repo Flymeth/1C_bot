@@ -19,33 +19,31 @@ module.exports = {
 
         const helpEmbed1 = new vars.discord.MessageEmbed()
         .setTitle("Comment utiliser cette commande ?")
-        .addField("Etape #1:", "Créez un block de code (voir image 1) avec le code à executé à l'interrieur. Puis envoyer le sur le salon actuel.")
-        .addField("Etape #2:", "Répondez au message que vous venez d'envoyer avec la commande `1c.python`.")
+        .addField("Etape #1:", "Créez un block de code (Cf **image 1**) avec le code à executé à l'interrieur. Puis envoyer le sur le salon actuel.")
+        .addField("Etape #2:", "Répondez au message que vous venez d'envoyer avec la commande `1c.python` (Cf **image 2**).")
         .addField("Etape #3:", "Obtenez votre résultat.")
         .setFooter("Note: les fonction input() ne fonctioneront pas. De plus si votre code prend plus de 1s à être executé, il sera automatiquement arrêté.")
         .setColor(color)
 
         const helpEmbed2 = new vars.discord.MessageEmbed()
-        .setImage('https://cdn.discordapp.com/attachments/888478345229139980/888478384261324880/python_tuto_0.png')
+        .setImage(vars.assets.tuto_discord1)
         .setColor(color)
 
         const helpEmbed3 = new vars.discord.MessageEmbed()
-        .setImage('https://cdn.discordapp.com/attachments/888478345229139980/888478385792241684/python_tuto_1.png')
+        .setImage(vars.assets.tuto_discord2)
         .setColor(color)
 
         const embeds = [helpEmbed1, helpEmbed2, helpEmbed3]
 
         if(!messageID) {
-            e.reply({content: "Voici comment utiliser cette commande:", embeds})
+            e.reply({embeds})
             return
         }
 
         const code = e.channel.messages.cache.get(messageID)
-        if(!code.content.startsWith("```py") || !code.content.endsWith('```')) return e.reply({content: "Ton code ne peux pas être interprété en python. Voici comment utiliser cette commande:", embeds})
+        if(!code.content.startsWith("```py") || !code.content.endsWith('```')) return e.reply({content: "Ton code ne peux pas être interprété en python!", embeds})
 
-        const loadingEmoji = vars.client.emojis.cache.find(e => e.name === 'loading')
-
-        if(!vars.slash) {var reaction = await e.react(loadingEmoji)}
+        if(!vars.slash) {var reaction = await e.react(vars.loadingEmote)}
 
         let python = code.content.replace('```py', '')
         python = python.substr(0, python.length-3)
@@ -95,7 +93,7 @@ module.exports = {
             const outEmbed = new vars.discord.MessageEmbed()
             .setColor(embedColor)
             .setAuthor(`Voici le résultat de ton programe ${errored? "(erreur)" : ""}:`, e.member.user.displayAvatarURL({dynamic: true, size: 1024}))
-            .setDescription('```console\n ' + out + '```')
+            .setDescription('```console\n' + out + '```')
             e.reply({embeds: [outEmbed]})
         })
     }

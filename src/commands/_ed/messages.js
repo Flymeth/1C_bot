@@ -38,6 +38,6 @@ module.exports = {
             embed.addField(`De ${author}:`, "```" + txt + "```")
         }
 
-        e.reply({embeds: [embed]})
+        return e.reply({embeds: [embed]})
     }
 }

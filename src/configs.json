@@ -1,7 +1,15 @@
 {
     "prefix": "1c.",
-    "developer": "514475217779818496",
+    "developper": {
+        "discord_id": "514475217779818496",
+        "name": "Flymeth",
+        "website": "https://flymeth.net"
+    },
     "admins": ["514475217779818496", "689439437964574732", "769311474220531732", "769311474220531732"],
     "guild": "883309104863531058",
-    "awaitTime": 25000
+    "awaitTime": 25000,
+    "assets": {
+        "tuto_discord1": "https://cdn.discordapp.com/attachments/888478345229139980/888478384261324880/python_tuto_0.png",
+        "tuto_discord2": "https://cdn.discordapp.com/attachments/888478345229139980/888478385792241684/python_tuto_1.png"
+    }
 }

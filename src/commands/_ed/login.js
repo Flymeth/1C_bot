@@ -11,10 +11,20 @@ module.exports = {
     description: "Connectes-toi à ton compte EcoleDirecte!",
     active: true,
     run: async (e, vars, args) => {
+
+        var reaction;
+        if(!vars.slash) reaction = await e.react(vars.loadingEmote)
+
+        const isUser = await getAccount(e.member.user)
+        if(isUser) {
+            if(!vars.slash) await reaction.remove()
+            return e.reply("Tu es déjà connecté! Si tu veux te connecter à un autre compte, il te faudra faire la commande `" + vars.options.prefix + "ecoleDirecte logout` pour te déconnecter de ce compte.")
+        }
+
         const embed = new vars.discord.MessageEmbed()
         .setColor(vars.colors.user || "RANDOM")
         .setTitle("Entres ton nom d'utilisateur:")
-        .setFooter("Notez qu'en aucun cas votre nom d'utilisateur & votre mot de passe ne seront enregistrés de quelques façons qu'il soit.")
+        .setFooter("Notez que votre identifiant et mot de passe seront sauvegardé dans un fichier qui ne pourra être ouvert d'aucune façons (par le développeur comme par les utilisateurs). Lors de votre déconnection, toutes vos informations seront oublié (également votre identifiant et mot de passe).")
         const dmChannel = await e.member.user.createDM()
 
         e.member.user.send({embeds: [embed]}).then(async message => {
@@ -23,6 +33,10 @@ module.exports = {
             const accountName = messageForAccount.first()
 
             async function end(msg) {
+                if(!vars.slash) {
+                    reaction.users.remove()
+                    e.delete()
+                }
                 await message.delete()
                 await securityMSG?.delete()
                 await message.channel.send(msg)
@@ -67,8 +81,8 @@ module.exports = {
             }
 
             // Si ca a été enregistré
-            end(`Ton compte EcoleDirecte est maintenant lié à celui de discord!\n> https://discord.com/channels/${e.guild.id}/${e.channel.id}`)
             e.channel.send(e.member.user.toString() + " vient de connecter son compte ecoleDirecte à celui de discord!")
+            return end(`Ton compte EcoleDirecte est maintenant lié à celui de discord!\n> https://discord.com/channels/${e.guild.id}/${e.channel.id}`)
         })
     }
 }

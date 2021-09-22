@@ -33,7 +33,7 @@ module.exports = {
         if(vars.slash) subCommand = vars.slash.getString('action')
 
         if(!subCommand) {
-            return help.run(e, vars, args, commands, "ecoleDirecte")
+            return help.run(e, vars, args, commands, "ecoleDirecte", "Note: les serveurs d'école directe sont très long à la détente. Donc si les commandes sont longue à répondre, cela ne vient pas du robot.")
         }
 
         const doCommand = commands.find(c => {
@@ -41,13 +41,26 @@ module.exports = {
             if(c.alias) return c.alias.find(a => a === subCommand)
         })
         if(!doCommand) return e.reply({content: "Cette commande n'existe pas!", ephemeral: true})
-
+        
+        var mess;
+        var reaction;
+        function removeReactions() {
+            if(!vars.slash && reaction) reaction.users.remove()
+            if(mess) mess.delete()
+        }
         if(doCommand.needAccount) {
+            if(!vars.slash) reaction = await e.react(vars.loadingEmote)
+            mess = await e.channel.send("Récupérations des informations du compte de `" + e.member.user.tag + "`...")
+
             const account = await getAccount(e.member.user)
-            if(!account) return e.reply("Tu dois être connecté pour utiliser cette commande. Pour ce faire, utilise la commande `" + vars.options.prefix + "ecoleDirecte login`!")
+            if(!account) {
+                removeReactions()
+                return e.reply("Tu dois être connecté pour utiliser cette commande. Pour ce faire, utilise la commande `" + vars.options.prefix + "ecoleDirecte login`!")
+            }
             else vars.account = account
         }
 
-        return doCommand.run(e, vars, args)
+        await doCommand.run(e, vars, args)
+        return removeReactions()
     }
 }

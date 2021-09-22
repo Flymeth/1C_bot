@@ -1,6 +1,6 @@
 {
   "name": "1c_bot",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "",
   "main": "src/main.js",
   "scripts": {
@@ -11,11 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "api-ecoledirecte-france": "^0.1.1",
-    "discord.js": "^13.1.0",
-    "node-fetch": "^3.0.0",
-    "request": "^2.88.2"
+    "discord.js": "^13.1.0"
   },
   "engines": {
     "node": "16.x"
-  }
+  },
+  "homepage": "https://github.com/Flymeth/1C_bot#readme"
 }
