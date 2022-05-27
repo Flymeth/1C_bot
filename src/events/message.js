@@ -48,7 +48,10 @@ module.exports = {
             }
             vars.files = files
         }
-
-        doCommand.run(e, vars, args)
+        try {
+            doCommand.run(e, vars, args)
+        } catch (e) {
+            console.log('Error on command: ' + doCommand.name + " (event: message): ", e);
+        }
     }
 }

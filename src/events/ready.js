@@ -21,8 +21,8 @@ module.exports = {
             const cmdExist = existingCommands.find(c => c.name === cmd.name)
 
             if(cmdExist) {
-                var slashCommand = await vars.client.application.commands.edit(cmdExist, json)
-                console.log("Edited command: " + slashCommand.name);
+                // var slashCommand = await vars.client.application.commands.edit(cmdExist, json)
+                // console.log("Edited command: " + slashCommand.name);
             }else {
                 var slashCommand = await vars.client.application.commands.create(json)
                 console.log("Posted command: " + slashCommand.name);

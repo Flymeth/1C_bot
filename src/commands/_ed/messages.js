@@ -10,7 +10,6 @@ module.exports = {
         const {account} = vars
         const {data} = await vars.ecoledirecte.getMessages(account.token, account.ecoledirecte.id)
         const {received} = data.messages
-
         if(!received) return e.reply({content: "Tu n'as aucun message présent dans ta messagerie!", ephemeral: true})
 
         const sortedByName = {}
@@ -26,13 +25,19 @@ module.exports = {
         .setAuthor("Tu as " + received.length + " message(s):", e.member.user.displayAvatarURL({size: 1024, dynamic: true}))
         .setColor(vars.colors.user || vars.colors.bot || "RANDOM")
         for(let author in sortedByName) {
-            const messages = sortedByName[author]
+            const messages = sortedByName[author].filter(m => m.read.toString() === "false")
+            console.log(messages);
             let txt = ""
 
             for(let message of messages) {
                 const timestamp = new Date(message.date)
                 if(txt) txt+="\n"
                 txt+=`${timestamp.getDate()}/${timestamp.getMonth()+1}/${timestamp.getFullYear()}: ${message.subject}`
+            }
+            if(txt.length > 1024) {
+                txt= txt.slice(0, 1000).split('\n')
+                txt.pop()
+                txt= txt.join('\n') + '\n[...]'
             }
 
             embed.addField(`De ${author}:`, "```" + txt + "```")

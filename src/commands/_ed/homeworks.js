@@ -45,12 +45,13 @@ module.exports = {
 
             for(let id in dataWork) {
                 if(works) works+= "\n"
-
+                
                 const workInfos = dataWork[id]
                 for(let info in workInfos) {
                     if(workInfos[info] && legends[info]) works+= `${legends[info].emoji}`
                 }
-
+                
+                works+= "> "
                 works+= workInfos.matiere
             }
 

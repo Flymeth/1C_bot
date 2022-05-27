@@ -1,1 +1,1 @@
-nodemon ./src/main.js
+node ./src/main.js

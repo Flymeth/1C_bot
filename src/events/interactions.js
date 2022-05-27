@@ -2,8 +2,8 @@ const fs = require('fs')
 module.exports = {
     name: "interactionCreate",
     active: true,
-    run: (e, vars) => {
-        if(!e.isCommand() && !e.isContextMenu()) return
+    run: async (e, vars) => {
+        if(!e.isCommand() && !e.isContextMenu() || e.channel.type === "DM") return
         const {commandName} = e
         const command = vars.commands.find(c => c.name === commandName.toLowerCase())
 
@@ -36,7 +36,13 @@ module.exports = {
             }
             varsSlash.files = files
         }
+        await e.deferReply()
 
-        command.run(e, varsSlash, [])
+        e.reply = e.editReply
+        try {
+            command.run(e, varsSlash, [])
+        } catch (e) {
+            console.log('Error on command: ' + command.name + " (event: interactionCommand): ", e);
+        }
     }
 }

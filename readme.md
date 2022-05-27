@@ -40,7 +40,7 @@ Tout d'abord affichez la liste des commandes disponibles avec la commande `1c.ec
 > |`1c.ecoleDirecte account`|Affiche les informations de ton compte|
 > |`1c.ecoleDirecte devoirs`|Affiche ton cahier de texte|
 > |`1c.ecoleDirecte messages`|Affiche les messages envoyé par l'établissement|
-> |`1c.ecoleDirecte notes`|Affiche les notes de tes contrôles (en cours de création)|
+> |`1c.ecoleDirecte notes`|Affiche les notes de tes contrôles|
 > |`1c.ecoleDirecte logout`|Permet de te déconnecter de ton compte ecoleDirecte|
 
 ## **Autres fonctionnalitées:**

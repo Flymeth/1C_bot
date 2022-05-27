@@ -24,7 +24,7 @@ module.exports = {
         const embed = new vars.discord.MessageEmbed()
         .setColor(vars.colors.user || "RANDOM")
         .setTitle("Entres ton nom d'utilisateur:")
-        .setFooter("Notez que votre identifiant et mot de passe seront sauvegardé dans un fichier qui ne pourra être ouvert d'aucune façons (par le développeur comme par les utilisateurs). Lors de votre déconnection, toutes vos informations seront oublié (également votre identifiant et mot de passe).")
+        .setFooter("Notez que votre identifiant et mot de passe seront sauvegardé afin de ne pas à avoir à vous reconnecter à chaques commande (vos informations seront bien evidement criptés et innaccecible). Lors de votre déconnection, toutes vos informations seront oublié (également votre identifiant et mot de passe).")
         const dmChannel = await e.member.user.createDM()
 
         e.member.user.send({embeds: [embed]}).then(async message => {
@@ -34,11 +34,10 @@ module.exports = {
 
             async function end(msg) {
                 if(!vars.slash) {
-                    reaction.users.remove()
-                    e.delete()
+                    if(await e.channel.messages.cache.get(e.id)) e.delete()
                 }
-                await message.delete()
-                await securityMSG?.delete()
+                if(await message.channel.messages.cache.get(message.id)) await message.delete()
+                if(await securityMSG.channel.messages.cache.get(securityMSG.id)) await securityMSG.delete()
                 await message.channel.send(msg)
             }
 

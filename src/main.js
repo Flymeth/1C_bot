@@ -2,7 +2,6 @@ const discord = require('discord.js')
 const fs = require('fs')
 const ecoledirecte = require('api-ecoledirecte-france')
 const options = require('./configs.json')
-const {getAssets} = require('./tools/loadAssets')
 const package = require('../package.json')
 // token
 let secrets = {}
@@ -10,7 +9,7 @@ try {
     secrets = require('./secrets.json')
 } catch (e) {}
 
-const token = process.env.TOKEN || secrets.token
+const token = process.env.TOKEN || secrets.token || secrets.token
 
 const {Intents, Client} = require('discord.js')
 let allIntents = []
